@@ -5,13 +5,15 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon server"
+    "start": "nodemon server",
+    "test": "xo"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "xo": "^0.33.0"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -20,5 +22,13 @@
     "express": "^4.17.1",
     "mysql2": "^2.1.0",
     "sequelize": "^6.3.4"
+  },
+  "xo": {
+    "prettier": true,
+    "rules": {
+      "import/no-useless-path-segments": 0,
+      "import/extensions": 0,
+      "unicorn/import-index": 0
+    }
   }
 }
