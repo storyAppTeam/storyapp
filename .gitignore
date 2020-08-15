@@ -105,4 +105,4 @@ dist
 
 # others
 .history/
-package-lock.json
+.vscode

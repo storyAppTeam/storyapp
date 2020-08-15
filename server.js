@@ -1,4 +1,5 @@
 import dotenv from "dotenv"; dotenv.config();
+import initDb from "./database/index.js"
 
 import http from 'http';
 import express from 'express';
@@ -22,3 +23,5 @@ const server = http.createServer(app);
 server.listen(PORT, () => {
     console.log(`Server is started on port ${PORT}`);
 });
+
+initDb();
