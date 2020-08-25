@@ -1,32 +1,40 @@
-import Sequelize from 'sequelize';
+import sequelize from 'sequelize';
 
-const connection = new Sequelize(process.env.DATABASE_URL);
+const connection = new sequelize(process.env.DATABASE_URL);
 
-const User = connection.import("../models/User");
-const Story = connection.import("./models/Story");
-const Book = connection.import("./models/Book");
-const Comment = connection.import("./models/Comment");
-const Category = connection.import("./models/Category");
-const StoryRating = connection.import("./models/StoryRating");
-const BookRating = connection.import("./models/BookRating");
+import User from './models/user.js';
+import Story from './models/story.js';
+import Book from './models/book.js';
+import Comment from './models/comment.js';
+import Category from './models/category.js';
+import StoryRating from './models/story-rating.js';
+import BookRating from './models/book-rating.js';
 
-User.Story = User.hasMany(Story);
-Story.User = Story.belongsTo(User);
+User(connection);
+Story(connection);
+Book(connection);
+Comment(connection);
+Category(connection);
+StoryRating(connection);
+BookRating(connection);
 
-User.Book = User.hasMany(Book);
-Book.User = Book.belongsTo(User);
+connection.models.User.hasMany(connection.models.Story);
+connection.models.Story.belongsTo(connection.models.User);
 
-User.BookRating = User.hasMany(BookRating);
-BookRating.User = BookRating.belongsTo(User);
+connection.models.User.hasMany(connection.models.Book);
+connection.models.Book.belongsTo(connection.models.User);
 
-User.StoryRating = User.hasMany(StoryRating);
-StoryRating.User = StoryRating.belongsTo(User);
+connection.models.User.hasMany(connection.models.BookRating);
+connection.models.BookRating.belongsTo(connection.models.User);
 
-User.Comment = User.hasMany(Comment);
-Comment.User = Comment.belongsTo(User);
+connection.models.User.hasMany(connection.models.StoryRating);
+connection.models.StoryRating.belongsTo(connection.models.User);
 
-User.Comment = User.hasMany(Comment);
-Comment.User = Comment.belongsTo(User);
+connection.models.User.hasMany(connection.models.Comment);
+connection.models.Comment.belongsTo(connection.models.User);
+
+connection.models.User.hasMany(connection.models.Comment);
+connection.models.Comment.belongsTo(connection.models.User);
 
 const initializeDatabaseConnection = async () => {
 	try {
