@@ -1,6 +1,7 @@
 import sequelize from 'sequelize';
 
 const connection = new sequelize(process.env.DATABASE_URL);
+const { models } = connection;
 
 import User from './models/user.js';
 import Story from './models/story.js';
@@ -11,6 +12,8 @@ import StoryRating from './models/story-rating.js';
 import BookRating from './models/book-rating.js';
 import ReadStory from './models/read-story.js';
 import ReadBook from './models/read-book.js';
+import BookCategory from './models/book-category.js';
+import StoryCategory from './models/story-category.js';
 
 
 User(connection);
@@ -22,45 +25,48 @@ StoryRating(connection);
 BookRating(connection);
 ReadStory(connection);
 ReadBook(connection);
+BookCategory(connection);
+StoryCategory(connection);
 
-connection.models.User.hasMany(connection.models.Story);
-connection.models.Story.belongsTo(connection.models.User);
 
-connection.models.User.hasMany(connection.models.Book);
-connection.models.Book.belongsTo(connection.models.User);
+models.User.hasMany(models.Story);
+models.Story.belongsTo(models.User);
 
-connection.models.User.hasMany(connection.models.BookRating);
-connection.models.BookRating.belongsTo(connection.models.User);
+models.User.hasMany(models.Book);
+models.Book.belongsTo(models.User);
 
-connection.models.Book.hasMany(connection.models.BookRating);
-connection.models.BookRating.belongsTo(connection.models.Book);
+models.User.hasMany(models.BookRating);
+models.BookRating.belongsTo(models.User);
 
-connection.models.User.hasMany(connection.models.StoryRating);
-connection.models.StoryRating.belongsTo(connection.models.User);
+models.Book.hasMany(models.BookRating);
+models.BookRating.belongsTo(models.Book);
 
-connection.models.Story.hasMany(connection.models.StoryRating);
-connection.models.StoryRating.belongsTo(connection.models.Story);
+models.User.hasMany(models.StoryRating);
+models.StoryRating.belongsTo(models.User);
 
-connection.models.User.hasMany(connection.models.Comment);
-connection.models.Comment.belongsTo(connection.models.User);
+models.Story.hasMany(models.StoryRating);
+models.StoryRating.belongsTo(models.Story);
 
-connection.models.Story.hasMany(connection.models.Comment);
-connection.models.Comment.belongsTo(connection.models.Story);
+models.User.hasMany(models.Comment);
+models.Comment.belongsTo(models.User);
 
-connection.models.Book.hasMany(connection.models.Comment);
-connection.models.Comment.belongsTo(connection.models.Book);
+models.Story.hasMany(models.Comment);
+models.Comment.belongsTo(models.Story);
 
-connection.models.User.belongsToMany(connection.models.Story, { through: connection.models.ReadStory});
-connection.models.Story.belongsToMany(connection.models.User, { through: connection.models.ReadStory});
+models.Book.hasMany(models.Comment);
+models.Comment.belongsTo(models.Book);
 
-connection.models.User.belongsToMany(connection.models.Book, { through: connection.models.ReadBook});
-connection.models.Book.belongsToMany(connection.models.User, { through: connection.models.ReadBook});
+models.User.belongsToMany(models.Story, { through: models.ReadStory});
+models.Story.belongsToMany(models.User, { through: models.ReadStory});
 
-connection.models.Book.belongsToMany(connection.models.Category, { through: 'BookCategories'});
-connection.models.Category.belongsToMany(connection.models.Book, { through: 'BookCategories'});
+models.User.belongsToMany(models.Book, { through: models.ReadBook});
+models.Book.belongsToMany(models.User, { through: models.ReadBook});
 
-connection.models.Story.belongsToMany(connection.models.Category, { through: 'StoryCategories'});
-connection.models.Category.belongsToMany(connection.models.Story, { through: 'StoryCategories'});
+models.Book.belongsToMany(models.Category, { through: models.BookCategory});
+models.Category.belongsToMany(models.Book, { through: models.BookCategory});
+
+models.Story.belongsToMany(models.Category, { through: models.StoryCategory});
+models.Category.belongsToMany(models.Story, { through: models.StoryCategory});
 
 
 const initializeDatabaseConnection = async () => {
