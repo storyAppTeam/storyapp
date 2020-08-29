@@ -43,9 +43,5 @@ export default (sequelize) => {
         cover: {
             type: STRING,
         },
-        author: {
-            type: UUID,
-            allownull: false,
-        }
     })
 };

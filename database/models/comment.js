@@ -12,10 +12,6 @@ export default (sequelize) => {
             primaryKey: true,
             allownull: false,
         },
-        author: {
-            type: UUID,
-            allownull: false,
-        },
         storyID: {
             type: UUID,
         },

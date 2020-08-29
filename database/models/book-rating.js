@@ -9,11 +9,6 @@ export default (sequelize) => {
             primaryKey: true,
             allownull: false,
         },
-        userID: {
-            type: UUID,
-            primaryKey: true,
-            allownull: false,
-        },
         rating: {
             type: INTEGER.UNSIGNED,
             allownull: false,
