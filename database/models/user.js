@@ -20,7 +20,6 @@ export default (sequelize) => {
             type: STRING,
             allownull: false,
         },
-        //czy naprawdę potrzebne nam jest do czegoś imię tego człowieka? Nick chyba powinien wystarczyć?
         name: {
             type: STRING,
             allownull: true,

@@ -1,6 +1,16 @@
 import sequelize from 'sequelize';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const connection = new sequelize(process.env.DATABASE_URL);
+const { DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_DIALECT } = process.env;
+
+console.log(DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_DIALECT);
+
+const connection = new sequelize(DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, {
+	host: DATABASE_HOST,
+	dialect: 'mysql',
+	logging: false
+});
 const { models } = connection;
 
 import User from './models/user.js';
