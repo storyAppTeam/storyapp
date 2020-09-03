@@ -4,11 +4,9 @@ dotenv.config();
 
 const { DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_DIALECT } = process.env;
 
-console.log(DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_DIALECT);
-
 const connection = new sequelize(DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, {
 	host: DATABASE_HOST,
-	dialect: 'mysql',
+	dialect: DATABASE_DIALECT,
 	logging: false
 });
 const { models } = connection;
