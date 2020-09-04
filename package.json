@@ -2,8 +2,7 @@
   "name": "storyapp",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
-  "type": "module",
+  "main": "server.mjs",
   "scripts": {
     "start": "nodemon server",
     "test": "xo"

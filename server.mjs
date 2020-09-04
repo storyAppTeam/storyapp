@@ -6,8 +6,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
-import indexRouter from './routes/index.js';
-import initDb from './database/index.js';
+import indexRouter from './routes/index.mjs';
+import initDb from './database/index.mjs';
 
 const app = express();
 

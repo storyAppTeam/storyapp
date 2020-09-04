@@ -11,17 +11,17 @@ const connection = new sequelize(DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASS
 });
 const { models } = connection;
 
-import User from './models/user.js';
-import Story from './models/story.js';
-import Book from './models/book.js';
-import Comment from './models/comment.js';
-import Category from './models/category.js';
-import StoryRating from './models/story-rating.js';
-import BookRating from './models/book-rating.js';
-import ReadStory from './models/read-story.js';
-import ReadBook from './models/read-book.js';
-import BookCategory from './models/book-category.js';
-import StoryCategory from './models/story-category.js';
+import User from './models/user.mjs';
+import Story from './models/story.mjs';
+import Book from './models/book.mjs';
+import Comment from './models/comment.mjs';
+import Category from './models/category.mjs';
+import StoryRating from './models/story-rating.mjs';
+import BookRating from './models/book-rating.mjs';
+import ReadStory from './models/read-story.mjs';
+import ReadBook from './models/read-book.mjs';
+import BookCategory from './models/book-category.mjs';
+import StoryCategory from './models/story-category.mjs';
 
 
 User(connection);

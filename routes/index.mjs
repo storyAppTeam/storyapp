@@ -1,5 +1,5 @@
 import express from 'express';
-import {helloStory} from '../controllers/hello.js';
+import {helloStory} from '../controllers/hello.mjs';
 
 const router = express();
 
