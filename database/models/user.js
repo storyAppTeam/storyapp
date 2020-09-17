@@ -1,8 +1,7 @@
-import sequelize from 'sequelize';
-
+const sequelize = require('sequelize');
 const { STRING, UUID} = sequelize.DataTypes;
 
-export default (sequelize) => {
+module.export =  sequelize => {
     sequelize.define('User', {
         userID: {
             type: UUID,
@@ -38,6 +37,7 @@ export default (sequelize) => {
             type: STRING,
             allownull: false,
         }
-    })
+    }),{}
+    return User;
 };
 

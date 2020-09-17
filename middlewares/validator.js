@@ -15,4 +15,4 @@ function validator() {
     };
 }
 
-export default validator;
+module.export =  validator;

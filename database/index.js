@@ -1,28 +1,38 @@
-import sequelize from 'sequelize';
-import dotenv from 'dotenv';
-dotenv.config();
+const Sequelize = require('sequelize');
 
 const { DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_DIALECT } = process.env;
 
-const connection = new sequelize(DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, {
+const connection = new Sequelize(DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, {
 	host: DATABASE_HOST,
 	dialect: DATABASE_DIALECT,
 	logging: false
 });
+
 const { models } = connection;
 
-import User from './models/user.mjs';
-import Story from './models/story.mjs';
-import Book from './models/book.mjs';
-import Comment from './models/comment.mjs';
-import Category from './models/category.mjs';
-import StoryRating from './models/story-rating.mjs';
-import BookRating from './models/book-rating.mjs';
-import ReadStory from './models/read-story.mjs';
-import ReadBook from './models/read-book.mjs';
-import BookCategory from './models/book-category.mjs';
-import StoryCategory from './models/story-category.mjs';
+const User = connection.import('./models/user.js');
+const Story = connection.import('./models/story.js');
+const Book = connection.import('./models/book.js');
+const Comment = connection.import('./models/comment.js');
+const Category = connection.import('./models/category.js');
+const StoryRating = connection.import('./models/story-rating.js');
+const BookRating = connection.import('./models/book-rating.js');
+const ReadStory = connection.import('./models/read-story.js');
+const ReadBook = connection.import('./models/read-book.js');
+const BookCategory = connection.import('./models/book-category.js');
+const StoryCategory = connection.import('./models/story-category.js');
 
+// const User = require('./models/user.js');
+// const Story = require('./models/story.js');
+// const Book = require('./models/book.js');
+// const Comment = require('./models/comment.js');
+// const Category = require('./models/category.js');
+// const StoryRating = require('./models/story-rating.js');
+// const BookRating = require('./models/book-rating.js');
+// const ReadStory = require('./models/read-story.js');
+// const ReadBook = require('./models/read-book.js');
+// const BookCategory = require('./models/book-category.js');
+// const StoryCategory = require('./models/story-category.js');
 
 User(connection);
 Story(connection);
@@ -55,9 +65,6 @@ models.StoryRating.belongsTo(models.User);
 models.Story.hasMany(models.StoryRating);
 models.StoryRating.belongsTo(models.Story);
 
-models.User.hasMany(models.Comment);
-models.Comment.belongsTo(models.User);
-
 models.Story.hasMany(models.Comment);
 models.Comment.belongsTo(models.Story);
 
@@ -81,6 +88,7 @@ const initializeDatabaseConnection = async () => {
 	try {
 		await connection.sync({alter: true});
 		console.log('The database connection has been successfully established!');
+		console.log('----------------------');
 	} catch (error) {
 		console.log({
 			error,
@@ -89,5 +97,8 @@ const initializeDatabaseConnection = async () => {
 		throw error;
 	}
 };
+initializeDatabaseConnection();
 
-export default initializeDatabaseConnection;
+// module.export =  initializeDatabaseConnection;
+
+module.export =  { initializeDatabaseConnection, User, Story, Book, Comment, Category, StoryRating, BookRating, ReadStory, ReadBook, BookCategory, StoryCategory, };

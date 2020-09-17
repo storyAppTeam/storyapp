@@ -1,8 +1,7 @@
-import sequelize from 'sequelize';
-
+const sequelize = require('sequelize');
 const { UUID, INTEGER} = sequelize.DataTypes;
 
-export default (sequelize)=> {
+module.export =  (sequelize)=> {
     sequelize.define('StoryRating', {
         storyID: {
             type: UUID,

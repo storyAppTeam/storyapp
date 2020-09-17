@@ -1,8 +1,7 @@
-import sequelize from 'sequelize';
-
+const sequelize = require('sequelize');
 const { STRING, UUID} = sequelize.DataTypes;
 
-export default (sequelize) => {
+module.export =  (sequelize) => {
     sequelize.define('Comment', {
         commentID: {
             type: UUID,
