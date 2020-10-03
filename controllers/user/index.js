@@ -8,4 +8,4 @@ const require = createRequire(import.meta.url);
 
 router.use('/register', require('./register.js'));
 
-module.export =  router;
+module.exports =  router;

@@ -1,7 +1,7 @@
 const sequelize = require('sequelize');
 const { STRING, UUID} = sequelize.DataTypes;
 
-module.export =  (sequelize) => {
+module.exports =  (sequelize) => {
     sequelize.define('Comment', {
         commentID: {
             type: UUID,

@@ -9,4 +9,4 @@ router.use('/register', registerRouter);
 router.use('/login', loginRouter);
 router.use('/logout', logoutRouter);
 
-module.export = router;
+module.exports = router;

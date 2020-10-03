@@ -1,5 +1,5 @@
 const sequelize = require('sequelize');
-module.export =  (sequelize) => {
+module.exports =  (sequelize) => {
     sequelize.define('ReadStory', {
     })
 };

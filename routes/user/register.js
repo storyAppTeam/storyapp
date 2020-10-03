@@ -5,4 +5,4 @@ const registerController = require('../../controllers/user/register.js');
 
 router.post('/', registerController.register)
 
-module.export =  router;
+module.exports =  router;

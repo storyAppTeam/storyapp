@@ -9,4 +9,4 @@ router.get('/', helloStory);
 
 router.use('/user', userRouter);
 
-module.export =  router;
+module.exports =  router;

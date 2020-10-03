@@ -15,4 +15,4 @@ function validator() {
     };
 }
 
-module.export =  validator;
+module.exports =  validator;

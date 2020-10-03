@@ -1,11 +1,12 @@
 const sequelize = require('sequelize');
-const { STRING, UUID} = sequelize.DataTypes;
+const { STRING, UUID, UUIDV4} = sequelize.DataTypes;
 
-module.export =  sequelize => {
+
+module.exports =  sequelize => {
     sequelize.define('User', {
         userID: {
             type: UUID,
-            defaultValue: sequelize.UUIDV4, 
+            defaultValue: UUIDV4, 
             primaryKey: true,
             allownull: false,
         },
@@ -37,7 +38,6 @@ module.export =  sequelize => {
             type: STRING,
             allownull: false,
         }
-    }),{}
-    return User;
+    })
 };
 

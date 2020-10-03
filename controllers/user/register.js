@@ -1,14 +1,34 @@
 
-const User = require("../../database/index.js");
+const {models} = require("../../database/index.js");
 
-module.export =  {
+module.exports =  {
   register: async (req, res) => {
     const { email, nickname, birthDate, password } = req.body;
 
-    try {
-      // console.log(User);
 
-      const addUser = await User.create({
+    try {
+      const isNicknameExist = await models.User.findOne({
+        where: { nickname },
+        attributes: { exclude: ["password"] },
+      });
+
+      if (!!isNicknameExist) {
+        return res.json({
+          status: `failure`,
+          msg: `Use diffrent nickname. ${nickname} exist.`,
+        });
+      }
+    } catch (err) {
+      res.status(500).json({
+        status: `failure`,
+        msg: `Error in first tryCatch block`,
+      });
+      throw err;
+    }
+
+    try {
+
+      const addUser = await models.User.create({
         email,
         nickname,
         //   birthDate,
@@ -29,7 +49,5 @@ module.export =  {
       });
       throw err;
     }
-
-    return res.json({ msg: "register" });
   },
 };

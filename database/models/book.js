@@ -2,7 +2,7 @@ const sequelize = require('sequelize');
 
 const { STRING, TEXT, UUID, INTEGER, BOOLEAN} = sequelize.DataTypes;
 
-module.export =  (sequelize) => {
+module.exports =  (sequelize) => {
     sequelize.define('Book', {
         bookID: {
             type: UUID,
