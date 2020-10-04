@@ -1,8 +1,9 @@
 const sequelize = require('sequelize');
-const { STRING, UUID, UUIDV4} = sequelize.DataTypes;
+const bcrypt = require('bcryptjs');
+const { STRING, UUID, UUIDV4, DATEONLY} = sequelize.DataTypes;
 
 
-module.exports =  sequelize => {
+module.exports = sequelize => {
     sequelize.define('User', {
         userID: {
             type: UUID,
@@ -17,6 +18,10 @@ module.exports =  sequelize => {
         nickname: {
             type: STRING,
             allownull: false,
+        },
+        birthDate: {
+            type: DATEONLY,
+            allownull: true,
         },
         name: {
             type: STRING,
@@ -38,6 +43,16 @@ module.exports =  sequelize => {
             type: STRING,
             allownull: false,
         }
-    })
+    },
+    {
+        sequelize,
+        modelName: 'user',
+        hooks: {
+            beforeCreate: user => {
+                user.password = bcrypt.hashSync(user.password, 11)
+            }
+        }
+    }
+    )
 };
 

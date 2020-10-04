@@ -1,23 +1,32 @@
+const { models } = require("../../database/index.js");
 
-const {models} = require("../../database/index.js");
-
-module.exports =  {
+module.exports = {
   register: async (req, res) => {
     const { email, nickname, birthDate, password } = req.body;
-
 
     try {
       const isNicknameExist = await models.User.findOne({
         where: { nickname },
         attributes: { exclude: ["password"] },
       });
-
       if (!!isNicknameExist) {
         return res.json({
           status: `failure`,
           msg: `Use diffrent nickname. ${nickname} exist.`,
         });
       }
+
+      const isEmailExist = await models.User.findOne({
+        where: { email },
+        attributes: { exclude: ["password"] },
+      });
+      if (!!isEmailExist) {
+        return res.json({
+          status: `failure`,
+          msg: `Use diffrent email. ${email} exist.`,
+        });
+      }
+
     } catch (err) {
       res.status(500).json({
         status: `failure`,
@@ -27,13 +36,12 @@ module.exports =  {
     }
 
     try {
-
       const addUser = await models.User.create({
         email,
         nickname,
-        //   birthDate,
+        birthDate,
         password,
-        salt:"something",
+        salt: "something",
         avatar: null,
         language: "pl",
       });
