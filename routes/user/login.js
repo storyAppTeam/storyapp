@@ -1,8 +1,21 @@
-const express = require('express');
+const bodyParser = require("body-parser");
+const express = require("express");
 const router = express.Router();
 
-const loginController = require('../../controllers/user/login.js');
+const validator = require("../../middlewares/validator.js");
+const { check } = require("express-validator");
 
-router.post('/', loginController.login)
+const loginController = require("../../controllers/user/login.js");
 
-module.exports =  router;
+router.post(
+  "/",
+  bodyParser.json(),
+  [
+    check("nickname").isString(),
+    check("password").isString().isLength({ min: 8, max: 36 }),
+  ],
+  validator(),
+  loginController.login
+);
+
+module.exports = router;

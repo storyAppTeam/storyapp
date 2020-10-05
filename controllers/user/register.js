@@ -10,7 +10,7 @@ module.exports = {
         attributes: { exclude: ["password"] },
       });
       if (!!isNicknameExist) {
-        return res.json({
+        return res.status(200).json({
           status: `failure`,
           msg: `Use diffrent nickname. ${nickname} exist.`,
         });
@@ -21,7 +21,7 @@ module.exports = {
         attributes: { exclude: ["password"] },
       });
       if (!!isEmailExist) {
-        return res.json({
+        return res.status(200).json({
           status: `failure`,
           msg: `Use diffrent email. ${email} exist.`,
         });
@@ -30,7 +30,7 @@ module.exports = {
     } catch (err) {
       res.status(500).json({
         status: `failure`,
-        msg: `Error in first tryCatch block`,
+        msg: err,
       });
       throw err;
     }
@@ -53,7 +53,7 @@ module.exports = {
     } catch (err) {
       res.status(500).json({
         status: `failure`,
-        msg: `failure to register register user ${nickname}`,
+        msg: err,
       });
       throw err;
     }
