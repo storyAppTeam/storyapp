@@ -1,11 +1,11 @@
-const { models } = require("../../database/index.js");
+const { User } = require("../../database/index.js").models;
 
 module.exports = {
   register: async (req, res) => {
     const { email, nickname, birthDate, password } = req.body;
 
     try {
-      const isNicknameExist = await models.User.findOne({
+      const isNicknameExist = await User.findOne({
         where: { nickname },
         attributes: { exclude: ["password"] },
       });
@@ -16,7 +16,7 @@ module.exports = {
         });
       }
 
-      const isEmailExist = await models.User.findOne({
+      const isEmailExist = await User.findOne({
         where: { email },
         attributes: { exclude: ["password"] },
       });
@@ -36,7 +36,7 @@ module.exports = {
     }
 
     try {
-      const addUser = await models.User.create({
+      const addUser = await User.create({
         email,
         nickname,
         birthDate,

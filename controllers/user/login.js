@@ -1,20 +1,17 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { models } = require("../../database/index.js");
+const { User } = require("../../database/index.js").models;
 
 module.exports = {
   login: async (req, res) => {
     const { nickname, password } = req.body;
     try {
-      const isNicknameExist = await models.User.findOne({
+      const user = await User.findOne({
         where: { nickname },
       });
 
-      if (
-        !!isNicknameExist &&
-        bcrypt.compareSync(password, isNicknameExist.dataValues.password)
-      ) {
-        const { UserID } = isNicknameExist.dataValues;
+      if (!!user && bcrypt.compareSync(password, user.dataValues.password)) {
+        const { UserID } = user.dataValues;
         const token = jwt.sign({ UserID, role: "user" }, process.env.JWT_KEY);
 
         return res
