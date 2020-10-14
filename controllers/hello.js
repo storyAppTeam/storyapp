@@ -1,5 +1,5 @@
 module.exports = {
-	helloStory: (req, res) => {
-	  return res.end(`Hello StoryApp!`);
-	},
-  };
+  helloStory: (req, res) => {
+    return res.end(`Hello StoryApp!`);
+  },
+};

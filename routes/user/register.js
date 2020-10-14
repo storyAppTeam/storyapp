@@ -18,11 +18,11 @@ router.post(
     check("nickname").isString(),
     check("password")
       .isString()
-      .isLength({ min: 8, max: 36 })
-      .matches(regexpPassword)
-      .withMessage(
-        "Password must contain minimum 8 characters, small and big letter, digit and special character. Available characters: ! @ # $ % ^ & * ( )"
-      ),
+      // .isLength({ min: 8, max: 36 })
+      // .matches(regexpPassword)
+      // .withMessage(
+      //   "Password must contain minimum 8 characters, small and big letter, digit and special character. Available characters: ! @ # $ % ^ & * ( )"
+      // ),
   ],
   validator(),
   registerController.register

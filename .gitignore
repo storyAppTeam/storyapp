@@ -106,3 +106,4 @@ dist
 # others
 .history/
 .vscode
+sessions/
