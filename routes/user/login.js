@@ -11,7 +11,7 @@ router.post(
   "/",
   bodyParser.json(),
   [
-    check("nickname").isString(),
+    check("email").isString().isEmail(),
     check("password").isString().isLength({ min: 8, max: 36 }),
   ],
   validator(),
