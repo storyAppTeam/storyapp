@@ -41,8 +41,7 @@ module.exports = {
       })(req, res, next);
 
       passport.deserializeUser((email, done) => {
-        const user = loggedUser.email === email ? loggedUser : false;
-        done(null, user);
+        done(null, email);
     });
 
       /////////////////////////////////////////////////////////////////
