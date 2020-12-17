@@ -1,12 +1,13 @@
-import sequelize from 'sequelize';
+const sequelize = require('sequelize');
+const bcrypt = require('bcryptjs');
+const { STRING, UUID, UUIDV4, DATEONLY} = sequelize.DataTypes;
 
-const { STRING, UUID} = sequelize.DataTypes;
 
-export default (sequelize) => {
+module.exports = sequelize => {
     sequelize.define('User', {
         userID: {
             type: UUID,
-            defaultValue: sequelize.UUIDV4, 
+            defaultValue: UUIDV4, 
             primaryKey: true,
             allownull: false,
         },
@@ -17,6 +18,10 @@ export default (sequelize) => {
         nickname: {
             type: STRING,
             allownull: false,
+        },
+        birthDate: {
+            type: DATEONLY,
+            allownull: true,
         },
         name: {
             type: STRING,
@@ -38,6 +43,16 @@ export default (sequelize) => {
             type: STRING,
             allownull: false,
         }
-    })
+    },
+    {
+        sequelize,
+        modelName: 'user',
+        hooks: {
+            beforeCreate: user => {
+                user.password = bcrypt.hashSync(user.password, 11)
+            }
+        }
+    }
+    )
 };
 

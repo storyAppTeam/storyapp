@@ -1,10 +1,9 @@
-import sequelize from 'sequelize';
-
+const sequelize = require('sequelize');
 const { STRING, TEXT, UUID, INTEGER, BOOLEAN} = sequelize.DataTypes;
 
-export default (sequelize) => {
-    sequelize.define('Book', {
-        bookID: {
+module.exports =  (sequelize) => {
+    sequelize.define('Story', {
+        storyID: {
             type: UUID,
             defaultValue: sequelize.UUIDV4, 
             primaryKey: true,
@@ -43,5 +42,9 @@ export default (sequelize) => {
         cover: {
             type: STRING,
         },
+        author: {
+            type: UUID,
+            allownull: false,
+        }
     })
 };
